@@ -1,0 +1,5 @@
+# Project exclude paths
+/mayikt-pay-api/target/
+/mayikt-pay-consumer/target/
+/mayikt-pay-job/target/
+/mayikt-pay-utils/target/

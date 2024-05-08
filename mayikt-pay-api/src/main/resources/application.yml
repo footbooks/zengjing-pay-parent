@@ -1,0 +1,40 @@
+server:
+  port: 90
+logging:
+  level:
+    org.springframework.web: INFO
+    com.github.binarywang.demo.wx.mp: DEBUG
+    me.chanjar.weixin: DEBUG
+wx:
+  mp:
+    configs:
+      - appId: wxa6320efb97081ad7
+        secret: 287fc44c6502524b36a529ce117e25d7
+        token: zengjing
+zengjing:
+  pay:
+    notifyMerchantTemplateId: EUjlBWcjYNAIVp8j1bTsujxk-10LTUENr43zuWC7Ur4
+    notifyMechantSettlementTemplateId: wAJF8Z8XMaZgkwQl7_3CX98CdDoxV0k4hKaurfelA3Y
+  userName: zengjing
+  thread:
+    corePoolSize: 12
+    maxPoolSize: 12
+    queueCapacity: 20
+    keepAlive: 60
+spring:
+  rabbitmq:
+    ####连接地址
+    host: 192.168.28.130
+    ####端口号
+    port: 5673
+    ####账号
+    username: admin
+    ####密码
+    password: admin
+    ### 地址
+    virtual-host: /12VirtualHost
+  datasource:
+    password: 123456
+    username: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/mayikt_test12?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8

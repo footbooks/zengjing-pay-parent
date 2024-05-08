@@ -1,0 +1,59 @@
+server:
+  port: 7070
+logging:
+  level:
+    org.springframework.web: INFO
+    com.github.binarywang.demo.wx.mp: DEBUG
+    me.chanjar.weixin: DEBUG
+wx:
+  mp:
+    configs:
+      -   appId: wxa6320efb97081ad7
+          secret: 287fc44c6502524b36a529ce117e25d7
+          token: zengjing
+zengjing:
+  pay:
+    notifyMerchantTemplateId: EUjlBWcjYNAIVp8j1bTsujxk-10LTUENr43zuWC7Ur4
+  userName: zengjing
+  thread:
+    corePoolSize: 12
+    maxPoolSize: 12
+    queueCapacity: 20
+    keepAlive: 60
+spring:
+  rabbitmq:
+    ####连接地址
+    host: 192.168.28.130
+    ####端口号
+    port: 5673
+    ####账号
+    username: admin
+    ####密码
+    password: admin
+    ### 地址
+    virtual-host: /12VirtualHost
+    listener:
+      simple: ## 修改配置为手动ack模式
+#        acknowledge-mode: manual
+        retry:
+          enabled: true           # 开启消费者出现异常情况下，进行重试消费，默认false
+          max-attempts: 3         # 最大重试次数，默认为3
+          initial-interval: 3000  # 重试间隔时间，默认1000(单位毫秒)
+  application:
+    name: mayikt-pay-consumer
+  datasource:
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/mayikt_test12?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8
+  redis:
+    # Redis服务器地址
+    host: 127.0.0.1
+    # Redis服务器端口号
+    port: 6379
+    # 使用的数据库索引，默认是0
+    database: 0
+    # 连接超时时间
+    timeout: 1800000
+    #    # 设置密码
+    #    password: "123456"

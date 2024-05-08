@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title>填写商家入驻信息</title>
+  <meta charset="UTF-8">
+  <script type="application/json"></script>
+<!--  <script src="http://static.mayikt.com/jquery-1.11.1.min.js?t=2118bbe3-b1d9-44f7-9eb2-eb629674f7de"-->
+<!--          type="text/javascript" charset="utf-8"></script>-->
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.bootcss.com/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+  <link rel="stylesheet" href="https://www.layuicdn.com/layui-v2.5.6/css/layui.css">
+  <script src="https://www.layuicdn.com/layui-v2.5.6/layui.js"></script>
+</head>
+<body>
+
+<form class="layui-form" action="http://127.0.0.1:90/merchant/merchantSettlement" method="post">
+  <div class="layui-form-item">
+    <label class="layui-form-label">企业名称</label>
+    <div class="layui-input-block">
+      <input type="text" name="enterpriseName" value="深圳马化腾有限公司"
+             placeholder="请输入" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">企业社会信用代码</label>
+    <div class="layui-input-block">
+      <input type="text" value="1234567" name="socialCreditCode" placeholder="请输入" autocomplete="off"
+             class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">营业执照图片</label>
+    <div class="layui-input-block">
+      <input type="text" value="1234567" name="businessLicenseUrl" placeholder="请输入" autocomplete="off"
+             class="layui-input">
+    </div>
+  </div>
+
+  <div class="layui-form-item">
+    <label class="layui-form-label">法人</label>
+    <div class="layui-input-block">
+      <input type="text" value="马化腾" name="juridicalPerson" placeholder="请输入" autocomplete="off"
+             class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">法人身份证信息</label>
+    <div class="layui-input-block">
+      <input type="text" value="111" name="juridicalPersonUrl" placeholder="请输入" autocomplete="off"
+             class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">法人身份证信息</label>
+    <div class="layui-input-block">
+      <input type="text" value="42" name="juridicalPersonUrl" placeholder="请输入" autocomplete="off"
+             class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">联系人</label>
+    <div class="layui-input-block">
+      <input type="text" value="王麻子" name="contacts" placeholder="请输入" autocomplete="off"
+             class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">联系人手机号码</label>
+    <div class="layui-input-block">
+      <input type="text" value="15527339672" name="contactNumber" placeholder="请输入" autocomplete="off"
+             class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+    </div>
+  </div>
+  <input type="hidden" name="qrCodeToken" id="qrCodeToken">
+</form>
+
+<script>
+  var qrCodeToken = document.getElementById("qrCodeToken");
+  qrCodeToken.value =getUrlParam("qrCodeToken");
+  layui.use('form', function () {
+    var form = layui.form;
+    //监听提交
+    form.on('submit(formDemo)', function (data) {
+      $.ajax({
+        type: "POST",
+        url: "http://127.0.0.1:90/merchant/merchantSettlement",
+        async: false,
+        contentType: 'application/json',
+        data: JSON.stringify(data.field),
+        success: function (res) {
+          if(res.code==200){
+            layer.msg("提交资料成功....");
+          }else {
+            layer.msg("提交资料失败....");
+          }
+
+        },
+        error: function (err) {
+          console.log("err", err)
+        }
+      });
+      return false;
+    });
+  });
+
+  //获取url中的参数
+  function getUrlParam(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+    var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+    if (r != null) return unescape(r[2]);
+    return null; //返回参数值
+  }
+</script>
+
+
+</body>
+</html>
